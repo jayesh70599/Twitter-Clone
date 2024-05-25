@@ -2,7 +2,7 @@ import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 const CreatePost = () => {
@@ -12,7 +12,7 @@ const CreatePost = () => {
 	const imgRef = useRef(null);
 
 	const {data:authUser} = useQuery({queryKey: ['authUser']});
-	const queryClient = new QueryClient();
+	const queryClient =  useQueryClient();
 
 	const {mutate:CreatePost, isPending, error, isError} = useMutation({
 		mutationFn: async ({text, img}) => {
@@ -46,7 +46,6 @@ const CreatePost = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		CreatePost({img, text});
-		alert("Post created successfully");
 	};
 
 	const handleImgChange = (e) => {
