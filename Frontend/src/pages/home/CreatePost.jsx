@@ -12,7 +12,7 @@ const CreatePost = () => {
 	const imgRef = useRef(null);
 
 	const {data:authUser} = useQuery({queryKey: ['authUser']});
-	const queryClient = QueryClient();
+	const queryClient = new QueryClient();
 
 	const {mutate:CreatePost, isPending, error, isError} = useMutation({
 		mutationFn: async ({text, img}) => {
